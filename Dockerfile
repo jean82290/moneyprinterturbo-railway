@@ -93,7 +93,7 @@ COPY --from=fetch /caddy /usr/local/bin/caddy
 COPY --from=fetch /CADDY-LICENSE /usr/share/doc/caddy/LICENSE
 COPY NOTICE /usr/share/doc/moneyprinterturbo-railway/NOTICE
 COPY licenses/ /usr/share/doc/moneyprinterturbo-railway/licenses/
-COPY Caddyfile bootstrap.py entrypoint.sh /opt/railway/
+COPY Caddyfile bootstrap.py entrypoint.sh selftest.py /opt/railway/
 RUN chmod 0755 /opt/railway/entrypoint.sh \
     && cp /app/LICENSE /usr/share/doc/moneyprinterturbo-railway/MoneyPrinterTurbo-LICENSE \
     && python -m compileall -q /app/app /app/webui

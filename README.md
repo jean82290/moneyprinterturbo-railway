@@ -41,6 +41,7 @@ All are optional. The template generates the two secrets for you.
 | `PEXELS_API_KEYS` | | One or more Pexels keys, comma-separated |
 | `PIXABAY_API_KEYS` | | One or more Pixabay keys, comma-separated |
 | `MPT_TASK_RETENTION_DAYS` | `0` | Delete generated videos and cached footage older than this many days. `0` keeps everything |
+| `MPT_SELFTEST` | | `1` makes one test video after start-up and reports in the deploy logs. Remove it afterwards |
 
 A variable that is set wins over the same setting in the web UI at every start. Leave the `LLM_*` and `*_API_KEYS` variables empty if you prefer to manage those settings in the web UI.
 
@@ -79,7 +80,10 @@ The API reads its settings when the service starts. After changing providers or 
 - `bootstrap.py` writes `config.toml` on the volume from your variables. It only touches the keys listed at the top of the file, so settings made in the web UI are kept.
 - `Caddyfile` is the only public listener. The web UI and the API listen on `127.0.0.1`.
 
-`scripts/smoke-test.sh <url> <webui-password> <api-key>` checks a deployment's login, cookie and API key without making a video.
+Two checks are included:
+
+- `scripts/smoke-test.sh <url> <webui-password> <api-key>` checks a deployment's login, cookie and API key from your computer, without making a video.
+- `selftest.py` makes one short video inside the deployment, with a supplied script, a generated test pattern and the keyless voice, so it needs none of your API keys. Set the variable `MPT_SELFTEST=1` and redeploy to run it once after start-up (the result is in the deploy logs and the video in the Task Manager), then remove the variable.
 
 ## Updating MoneyPrinterTurbo
 

@@ -18,6 +18,8 @@
 #   PIXABAY_API_KEYS          see bootstrap.py
 #   MPT_TASK_RETENTION_DAYS   delete generated videos and cached footage older
 #                             than this many days (default 0 = keep everything)
+#   MPT_SELFTEST              1 = make one test video after start-up and report
+#                             in the logs (see selftest.py)
 #   PORT                      public port Railway routes to (default 8080)
 #   MPT_DATA_DIR              volume mount path (default /data)
 set -euo pipefail
@@ -218,6 +220,14 @@ caddy run --config "$RAILWAY_DIR/Caddyfile" --adapter caddyfile &
 caddy_pid=$!
 pids+=("$caddy_pid")
 log "ready: web UI login is '$WEBUI_USERNAME'; API docs at /docs (x-api-key header)"
+
+# Optional end-to-end check (see selftest.py). Its result does not stop the service.
+case "${MPT_SELFTEST:-}" in
+  1|true|TRUE|True|yes|on)
+    log "MPT_SELFTEST is set: making one test video (remove the variable afterwards)"
+    (run_app python -I "$RAILWAY_DIR/selftest.py" || true) &
+    ;;
+esac
 
 status=0
 wait -n "$api_pid" "$webui_pid" "$caddy_pid" || status=$?
