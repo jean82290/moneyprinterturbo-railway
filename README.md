@@ -4,6 +4,8 @@
 
 <p align="center"><img src="assets/icon.png" width="96" alt=""></p>
 
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/moneyprinterturbo-or-ai-short-video-gene?referralCode=NamAm4&utm_medium=integration&utm_source=template&utm_campaign=generic)
+
 ## What this template adds
 
 | | Stock MoneyPrinterTurbo image | This template |
@@ -18,7 +20,7 @@
 
 ## Deploy
 
-1. Deploy the template on Railway. Nothing needs to be filled in.
+1. Deploy [the template](https://railway.com/deploy/moneyprinterturbo-or-ai-short-video-gene?referralCode=NamAm4&utm_medium=integration&utm_source=template&utm_campaign=generic) on Railway. Nothing needs to be filled in; you can paste your LLM and Pexels keys there if you already have them.
 2. Open the service's public URL. Log in as `admin` with the `WEBUI_PASSWORD` value from the service's **Variables** tab.
 3. In **Settings**, choose your LLM provider and paste its API key, then add a free [Pexels](https://www.pexels.com/api/) API key for stock footage.
 4. Type a subject and press **Generate Video**.

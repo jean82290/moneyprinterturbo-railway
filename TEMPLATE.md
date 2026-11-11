@@ -1,6 +1,8 @@
 # Text for the Railway template form
 
-Copy each block into the matching field when you publish the template.
+Published listing: https://railway.com/deploy/moneyprinterturbo-or-ai-short-video-gene
+
+Copy each block into the matching field when you publish the template. Railway's form checks that the four headings carrying the template name are spelled exactly like the name, and it strips anything written between angle brackets.
 
 ---
 
@@ -31,11 +33,11 @@ https://raw.githubusercontent.com/jean82290/moneyprinterturbo-railway/main/asset
 ## Overview (Markdown)
 
 ```markdown
-# Deploy and Host MoneyPrinterTurbo on Railway
+# Deploy and Host MoneyPrinterTurbo | AI Short Video Generator with Login & API on Railway
 
 MoneyPrinterTurbo is an open-source AI short-video generator. Give it a topic: an LLM writes the script, stock footage is matched to it, a voice reads it and subtitles are burned in. You get a finished vertical or horizontal video for TikTok, Reels or YouTube Shorts.
 
-## About Hosting MoneyPrinterTurbo
+## About Hosting MoneyPrinterTurbo | AI Short Video Generator with Login & API
 
 This template builds the pinned MoneyPrinterTurbo release (v1.3.10) from source and runs it as one service with a Railway volume at `/data` for your settings, uploads and videos.
 
@@ -54,7 +56,7 @@ Things a bare MoneyPrinterTurbo deploy gets wrong on a public URL, handled here:
 - Marketing teams: quick product explainers and social clips in many languages, with subtitles
 - Trying AI video without installing Python, FFmpeg and ImageMagick on your own computer
 
-## Dependencies for MoneyPrinterTurbo Hosting
+## Dependencies for MoneyPrinterTurbo | AI Short Video Generator with Login & API Hosting
 
 - An API key for one LLM provider (OpenAI, Gemini, DeepSeek, Anthropic, Moonshot and many more), to write scripts
 - A free Pexels or Pixabay API key, for stock footage
@@ -77,8 +79,8 @@ First use:
 
 Order a video through the API (interactive docs at `/docs`):
 
-    curl -X POST "https://<your-domain>/api/v1/videos" \
-      -H "x-api-key: <MPT_API_KEY>" -H "Content-Type: application/json" \
+    curl -X POST "https://YOUR-DOMAIN/api/v1/videos" \
+      -H "x-api-key: YOUR_MPT_API_KEY" -H "Content-Type: application/json" \
       -d '{"video_subject": "Why octopuses have three hearts", "video_aspect": "9:16"}'
 
 Good to know:
@@ -90,7 +92,7 @@ Good to know:
 
 This is a community-maintained template, not affiliated with the MoneyPrinterTurbo project. You are responsible for the content you generate and publish.
 
-## Why Deploy MoneyPrinterTurbo on Railway?
+## Why Deploy MoneyPrinterTurbo | AI Short Video Generator with Login & API on Railway?
 
 Railway is a singular platform to deploy your infrastructure stack. Railway will host your infrastructure so you don't have to deal with configuration, while allowing you to vertically and horizontally scale it.
 
