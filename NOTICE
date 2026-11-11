@@ -1,0 +1,39 @@
+This repository packages MoneyPrinterTurbo for Railway.
+
+MoneyPrinterTurbo (https://github.com/harry0703/MoneyPrinterTurbo) is
+Copyright (c) 2024 Harry and licensed under the MIT License. The image builds
+the pinned release from source; its license is installed at
+/usr/share/doc/moneyprinterturbo-railway/MoneyPrinterTurbo-LICENSE and at
+/app/LICENSE.
+
+Changes made to the MoneyPrinterTurbo source (scripts/prepare-source.sh):
+
+  * The bundled background music (resource/songs) is removed. Upstream's
+    README states it was taken from YouTube videos; it is not covered by the
+    MIT license.
+  * The bundled fonts Microsoft YaHei (Microsoft Corporation), STHeiti
+    (Changzhou SinoType Technology) and UTM Kabel KT are removed. They are not
+    licensed for redistribution.
+  * The default subtitle font named in the code is changed from those fonts
+    to Noto Sans CJK.
+  * Documentation, tests and CI files are not copied into the image.
+
+Fonts shipped in the image:
+
+  * Noto Sans CJK, Copyright 2014-2021 Adobe (http://www.adobe.com/), SIL Open
+    Font License 1.1. From the Debian package fonts-noto-cjk; its copyright
+    file is installed at
+    /usr/share/doc/moneyprinterturbo-railway/NotoSansCJK-copyright.
+  * Be Vietnam Pro, Copyright 2021 The Be Vietnam Pro Project Authors, SIL Open
+    Font License 1.1 (licenses/OFL-BeVietnamPro.txt).
+  * Charm, Copyright 2018 The Charm Project Authors, SIL Open Font License 1.1
+    (licenses/OFL-Charm.txt).
+
+Caddy (https://caddyserver.com) is licensed under the Apache License,
+Version 2.0; its license is installed at /usr/share/doc/caddy/LICENSE.
+
+The packaging in this repository (Dockerfile, scripts, icon) is licensed under
+the MIT License; see LICENSE.
+
+This template is community-maintained. It is not affiliated with or endorsed
+by the MoneyPrinterTurbo project.

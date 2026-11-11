@@ -1,0 +1,53 @@
+# Public front door for MoneyPrinterTurbo.
+#
+# Upstream, the web UI has no login at all and the API is open unless a key is
+# configured. Here both listen on 127.0.0.1 only, and Caddy is the one thing
+# Railway can reach:
+#
+#   /healthz                      health check, no login (answers when the web UI is up)
+#   /api/*  /tasks/*  /docs ...   the REST API; MoneyPrinterTurbo itself requires
+#                                 the "x-api-key" header on /api/* and /tasks/*
+#   everything else               the web UI, behind a login
+#
+# The login is HTTP basic auth. After a successful login the browser also gets
+# a session cookie: Safari does not send basic-auth credentials when it opens
+# the WebSocket the web UI depends on, and would otherwise show a blank page.
+#
+# The entrypoint sets the {$...} variables.
+{
+	admin off
+	auto_https off
+	persist_config off
+	log {
+		level WARN
+	}
+}
+
+:{$PORT} {
+	handle /healthz {
+		rewrite * /_stcore/health
+		reverse_proxy 127.0.0.1:{$MPT_WEBUI_PORT}
+	}
+
+	@api path /api/* /tasks /tasks/* /docs /docs/* /redoc /openapi.json /ping
+	handle @api {
+		reverse_proxy 127.0.0.1:{$MPT_API_PORT} {
+			# Tell the API which scheme the visitor used, so its same-origin
+			# check accepts the "Try it out" button on /docs.
+			header_up X-Forwarded-Proto {$MPT_PUBLIC_SCHEME}
+		}
+	}
+
+	@session header_regexp Cookie (^|;\s*)mpt_session={$MPT_SESSION_TOKEN}(;|$)
+	handle @session {
+		reverse_proxy 127.0.0.1:{$MPT_WEBUI_PORT}
+	}
+
+	handle {
+		basic_auth {
+			{$MPT_WEBUI_USERNAME} {$MPT_WEBUI_PASSWORD_HASH}
+		}
+		header +Set-Cookie "mpt_session={$MPT_SESSION_TOKEN}; Path=/; Max-Age=2592000; HttpOnly; SameSite=Lax{$MPT_COOKIE_SECURE}"
+		reverse_proxy 127.0.0.1:{$MPT_WEBUI_PORT}
+	}
+}
